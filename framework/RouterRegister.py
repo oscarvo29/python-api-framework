@@ -1,18 +1,5 @@
-from typing import Callable
-
-# class singleton(class_):
-#     instances = {}
-#     def getInstance(*args, **kwargs):
-#         if class_ not in instances:
-#             isinstance[class_] = class_(*args, **kwargs)
-#         return instances[class_]
-#     return getInstance
-
-# @singleton
-# class RouteRegister(BaseClass):
-#     pass
-
-
+from typing import Union, Callable
+from .RequestLine import RequestLine
 
 class RouterRegister:
     class Route:
@@ -28,15 +15,25 @@ class RouterRegister:
         def __str__(self) -> str:
             return f"Method: {self.method}, Endpoint: {self.endpoint}, Func: {self.func.__name__}"
 
-    routes: list[Route] = []
+    routes: dict = {}
 
 
     @staticmethod
     def addRoute(method: str, endpoint: str, func: Callable):
+        key = f"{method}:{endpoint}"
         route = RouterRegister.Route(method, endpoint, func)
-        RouterRegister.routes.append(route)
+        RouterRegister.routes[key] = route
+        print(RouterRegister.routes)
 
     @staticmethod
-    def getAllRoutes() -> list[Route]: 
-        list = RouterRegister.routes
-        return list
+    def findRoute(request_line: RequestLine) -> Union[Callable, int, str]:
+        key = f"{request_line.request_method.strip()}:{request_line.http_endpoint}"
+        if key in RouterRegister.routes:
+            return RouterRegister.routes[key].func, 200, "OK"
+        else:
+            return RouterRegister.routes["GET:/err"].func, 404, "Page Not Found"
+
+    @staticmethod
+    def getAllRoutes() -> dict: 
+        routes = RouterRegister.routes
+        return routes

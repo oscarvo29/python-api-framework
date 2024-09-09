@@ -1,6 +1,6 @@
 import socket
 from .http import Http
-from .HttpHeader import HttpHeader
+from .HttpResponse import HttpResponse
 
 
 
@@ -13,10 +13,11 @@ def init_server():
     print("Server starts to accept connections from clients...")
     while(True):
         client_socket, client_address = server.accept()
-        header = HttpHeader("1.0", 200, "OK", "text/html", body="<h1>Hallo</h1>")
         client_request = client_socket.recv(1024).decode("utf-8")
-        Http.parseRequest(client_request)
+        request_line = Http.parseRequest(client_request)
+        http_response = HttpResponse(request_line)
+        # http_response = HttpResponse("1.0", 200, "OK", "text/html", body="<h1>Hallo</h1>")
 
-        client_socket.send(header.getHeader().encode())
+        client_socket.send(http_response.getHttpRespone().encode())
         client_socket.close()
 
