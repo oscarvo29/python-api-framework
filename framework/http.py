@@ -1,6 +1,5 @@
-from RequestLine import RequestLine
-from RouterRegister import RouterRegister
-
+from .RequestLine import RequestLine
+from .RouterRegister import RouterRegister
 
 
 class Http:
@@ -10,6 +9,8 @@ class Http:
     DELETE = "DELETE"
     PATCH = "PATCH"
     HEAD = "HEAD"
+
+    PORT = 8000
 
 
     def findHttpMethod(self, request_method: str) -> str:
@@ -27,10 +28,8 @@ class Http:
             case "HEAD":
                 return self.HEAD
             
-
     def parseRequest(request: str) -> RequestLine:
         request_line: RequestLine
-
 
         # splits the request header for each new line. 
         http_header_lines = request.split("\n") 
@@ -46,6 +45,7 @@ class Http:
                 request_line = RequestLine(request_method, http_endpoint, http_version)
         
         return request_line
+   
         
     def mapping(method: str, endpoint: str):
         def decorator(function):
