@@ -35,6 +35,13 @@ class Http:
         http_header_lines = request.split("\n") 
         for idx, line in enumerate(http_header_lines):
             if idx == 0: # Request line is always at the first line. 
+                """ 
+                    Lav nogle test her, og sikre dig det er en valid http request.
+                    hvis det ikke er, så skal der returneres en 400 error code.
+                """
+
+                
+
                 endpoint_start_idx = line.find('/')
                 request_method = line[0:endpoint_start_idx]
                 http_version_idx = line.find("H")

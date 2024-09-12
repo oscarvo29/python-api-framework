@@ -1,6 +1,7 @@
 import socket
 from .http import Http
 from .HttpResponse import HttpResponse
+from .RequestLogger import logger
 
 
 
@@ -16,7 +17,7 @@ def init_server():
         client_request = client_socket.recv(1024).decode("utf-8")
         request_line = Http.parseRequest(client_request)
         http_response = HttpResponse(request_line)
-        # http_response = HttpResponse("1.0", 200, "OK", "text/html", body="<h1>Hallo</h1>")
+        logger.info(f"client address: {client_address}")
 
         client_socket.send(http_response.getHttpRespone().encode())
         client_socket.close()

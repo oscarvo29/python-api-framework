@@ -1,0 +1,7 @@
+2024-09-09 15:54:09,302 - __main__ DEBUG - This is a debug message.
+2024-09-09 15:54:09,302 - __main__ INFO - This is an info message.
+2024-09-09 15:54:09,302 - __main__ WARNING - This is a warning message.
+2024-09-09 15:54:09,302 - __main__ ERROR - This is an error message.
+2024-09-09 15:54:09,302 - __main__ CRITICAL - This is a critical message.
+2024-09-09 15:57:02,399 - server INFO - client address: ('::1', 49903, 0, 0)
+2024-09-12 13:10:14,858 - server INFO - client address: ('::1', 57971, 0, 0)
