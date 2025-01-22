@@ -27,7 +27,7 @@ class RouterRegister:
 
     @staticmethod
     def findRoute(request_line: RequestLine) -> Union[Callable, int, str]:
-        key = f"{request_line.request_method.strip()}:{request_line.http_endpoint}"
+        key = f"{request_line.request_method.strip()}:{request_line.http_endpoint.strip()}"
         if key in RouterRegister.routes:
             return RouterRegister.routes[key].func, 200, "OK"
         else:

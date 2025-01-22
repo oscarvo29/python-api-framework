@@ -8,3 +8,6 @@ class RequestLine:
         self.request_method = request_method
         self.http_endpoint = http_endpoint
         self.http_version = http_version
+
+    def __str__(self) -> str:
+        return f"Method: {self.request_method}, Endpoint: {self.http_endpoint}, Versoin: {self.http_version}"

@@ -17,4 +17,10 @@ class HttpResponse:
         http_response = f"HTTP/1.0 {status_code} {status_message}\r\nContent-Type: Text/HTML\r\n\r\n{body}"
 
         return http_response
+    
+    def getHttpMethod(self) -> str:
+        return self.request_line.request_method
+
+    def getHttpEndpoint(self) -> str:
+        return self.request_line.http_endpoint
         
